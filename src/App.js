@@ -5,6 +5,7 @@ import UserInput from "./UserInput/UserInput";
 import UserOutput from "./UserOutput/UserOutput";
 import Validation from "./ValidationComponent/Validation";
 import Char from "./Char/Char";
+import Radium from 'radium';
 class App extends Component {
   state = {
     persons: [
@@ -74,7 +75,13 @@ class App extends Component {
       border: "1px solid blue",
       padding: "8px",
       cursor: "pointer",
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+
+      }
     };
+
     let persons = null;
     if (this.state.showPersons) {
       persons = (
@@ -93,6 +100,10 @@ class App extends Component {
         </div>
       );
       style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
     const charList = this.state.userInput.split("").map((ch, index) => {
@@ -141,4 +152,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
