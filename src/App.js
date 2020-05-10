@@ -3,7 +3,8 @@ import "./App.css";
 import Person from "./Person/Person";
 import UserInput from "./UserInput/UserInput";
 import UserOutput from "./UserOutput/UserOutput";
-
+import Validation from './ValidationComponent/Validation';
+import Char from './Char/Char';
 class App extends Component {
   state = {
     persons: [
@@ -13,8 +14,20 @@ class App extends Component {
     ],
     username: "Super Anton",
     showPersons: false,
+    userInput: ''
   };
+  inputChangedHandler = e => {
+    this.setState({userInput: e.target.value})
+  }
 
+  deleteCharHandler = (index) => {
+    const text = this.state.userInput.split('');
+    text.splice(index, 1);
+    const updatedText = text.join('');
+    console.log("App -> deleteCharHandler -> updatedText", updatedText)
+    this.setState({userInput: updatedText})
+  }
+   
   usernameChangedHandler = (e) => {
     this.setState({
       username: e.target.value,
@@ -74,30 +87,16 @@ class App extends Component {
             click={this.deletePersonHandler.bind(this, index)}
             changed={(event)=> this.nameChangedHandler(event, person.id)}/>
           })}
-          {/* <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
-          />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, "Hello")}
-            changed={this.nameChangedHandler}
-          >
-            My Hobbies: Racing{" "}
-            <ul>
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-            </ul>
-          </Person>
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}
-          /> */}
         </div>
       );
     }
+
+    const charList = this.state.userInput.split('').map((ch, index) => {
+      return <Char character={ch} 
+      key={index}
+      clicked={this.deleteCharHandler.bind(this, index)}/>
+    })
+
 
     return (
       <div className="App">
@@ -112,6 +111,11 @@ class App extends Component {
           currentName={this.state.username}
         />
         <UserOutput userName={this.state.username} />
+        <input type='text' onChange={this.inputChangedHandler} 
+        value={this.state.userInput}/>
+        <p>{this.state.userInput}</p>
+        <Validation inputLength={this.state.userInput.length}/>
+        {charList}
       </div>
     );
     // return React.createElement('div', {className:"App"}, React.createElement('h1', null, 'Does this work now?'))
