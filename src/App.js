@@ -5,7 +5,11 @@ import UserInput from "./UserInput/UserInput";
 import UserOutput from "./UserOutput/UserOutput";
 import Validation from "./ValidationComponent/Validation";
 import Char from "./Char/Char";
-import Radium, { StyleRoot } from "radium";
+import styled from 'styled-components';
+
+// import Radium, { StyleRoot } from "radium";
+
+
 class App extends Component {
   state = {
     persons: [
@@ -124,7 +128,7 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
+      // <StyleRoot>
         <div className="App">
           <h1>Hi, I'm a React App1</h1>
           <p className={classes.join(" ")}>This is working!</p>
@@ -146,10 +150,11 @@ class App extends Component {
           <Validation inputLength={this.state.userInput.length} />
           {charList}
         </div>
-      </StyleRoot>
+      // </StyleRoot>
     );
     // return React.createElement('div', {className:"App"}, React.createElement('h1', null, 'Does this work now?'))
   }
 }
 
-export default Radium(App);
+// export default Radium(App);
+export default App
