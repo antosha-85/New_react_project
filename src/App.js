@@ -5,7 +5,7 @@ import UserInput from "./UserInput/UserInput";
 import UserOutput from "./UserOutput/UserOutput";
 import Validation from "./ValidationComponent/Validation";
 import Char from "./Char/Char";
-import Radium from 'radium';
+import Radium, { StyleRoot } from "radium";
 class App extends Component {
   state = {
     persons: [
@@ -75,11 +75,10 @@ class App extends Component {
       border: "1px solid blue",
       padding: "8px",
       cursor: "pointer",
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-
-      }
+      ":hover": {
+        backgroundColor: "lightgreen",
+        color: "black",
+      },
     };
 
     let persons = null;
@@ -99,11 +98,11 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      style.backgroundColor = "red";
+      style[":hover"] = {
+        backgroundColor: "salmon",
+        color: "black",
+      };
     }
 
     const charList = this.state.userInput.split("").map((ch, index) => {
@@ -117,36 +116,37 @@ class App extends Component {
     });
 
     let classes = [];
-    if(this.state.persons.length <= 2) {
-      classes.push('red');
-    } 
-    if(this.state.persons.length <= 1) {
-      classes.push('bold');
+    if (this.state.persons.length <= 2) {
+      classes.push("red");
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push("bold");
     }
 
-    
     return (
-      <div className="App">
-        <h1>Hi, I'm a React App1</h1>
-        <p className={classes.join(' ')}>This is working!</p>
-        <button style={style} onClick={this.togglePersonsHandler}>
-          Toggle Persons
-        </button>
-        {persons}
-        <UserInput
-          changed={this.usernameChangedHandler}
-          currentName={this.state.username}
-        />
-        <UserOutput userName={this.state.username} />
-        <input
-          type="text"
-          onChange={this.inputChangedHandler}
-          value={this.state.userInput}
-        />
-        <p>{this.state.userInput}</p>
-        <Validation inputLength={this.state.userInput.length} />
-        {charList}
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, I'm a React App1</h1>
+          <p className={classes.join(" ")}>This is working!</p>
+          <button style={style} onClick={this.togglePersonsHandler}>
+            Toggle Persons
+          </button>
+          {persons}
+          <UserInput
+            changed={this.usernameChangedHandler}
+            currentName={this.state.username}
+          />
+          <UserOutput userName={this.state.username} />
+          <input
+            type="text"
+            onChange={this.inputChangedHandler}
+            value={this.state.userInput}
+          />
+          <p>{this.state.userInput}</p>
+          <Validation inputLength={this.state.userInput.length} />
+          {charList}
+        </div>
+      </StyleRoot>
     );
     // return React.createElement('div', {className:"App"}, React.createElement('h1', null, 'Does this work now?'))
   }
