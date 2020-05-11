@@ -5,7 +5,8 @@ console.log("styled", styled)
 // import Radium from 'radium';
 
 const person = props => {
-const StyledDiv = styled.div`width: 60%;
+const StyledDiv = styled.div`
+width: 60%;
 margin: 16px auto;
 border: 1px solid #eee;
 box-shadow: 0 2px 3px #ccc;
@@ -16,7 +17,7 @@ text-align: center ;
 @media (min-width: 500px) {
     width: 450px;
 }
-`
+`;
 
     // const style = {
     //     '@media (min-width: 500px)': {

@@ -8,7 +8,17 @@ import Char from "./Char/Char";
 import styled from 'styled-components';
 
 // import Radium, { StyleRoot } from "radium";
-
+const StyledButton = styled.button`
+background-color: ${props => props.alt ? 'red' : 'green'};
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+    &:hover {
+    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+    color: black;
+  }
+`;
 
 class App extends Component {
   state = {
@@ -16,7 +26,7 @@ class App extends Component {
       { id: "1", name: "Anton", age: 35 },
       { id: "2", name: "Max", age: 29 },
       { id: "3", name: "Stephanie", age: 28 },
-    ],
+    ], 
     username: "Super Anton",
     showPersons: false,
     userInput: "",
@@ -102,11 +112,11 @@ class App extends Component {
           })}
         </div>
       );
-      style.backgroundColor = "red";
-      style[":hover"] = {
-        backgroundColor: "salmon",
-        color: "black",
-      };
+      // style.backgroundColor = "red";
+      // style[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "black",
+      // };
     }
 
     const charList = this.state.userInput.split("").map((ch, index) => {
@@ -132,9 +142,9 @@ class App extends Component {
         <div className="App">
           <h1>Hi, I'm a React App1</h1>
           <p className={classes.join(" ")}>This is working!</p>
-          <button style={style} onClick={this.togglePersonsHandler}>
+          <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
             Toggle Persons
-          </button>
+          </StyledButton>
           {persons}
           <UserInput
             changed={this.usernameChangedHandler}
