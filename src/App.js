@@ -1,24 +1,24 @@
 import React, { Component } from "react";
-import "./App.css";
+import classes from "./App.module.css";
 import Person from "./Person/Person";
 import UserInput from "./UserInput/UserInput";
 import UserOutput from "./UserOutput/UserOutput";
 import Validation from "./ValidationComponent/Validation";
 import Char from "./Char/Char";
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 // import Radium, { StyleRoot } from "radium";
-const StyledButton = styled.button`
-background-color: ${props => props.alt ? 'red' : 'green'};
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointer;
-    &:hover {
-    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
-    color: black;
-  }
-`;
+// const StyledButton = styled.button`
+// background-color: ${props => props.alt ? 'red' : 'green'};
+//   font: inherit;
+//   border: 1px solid blue;
+//   padding: 8px;
+//   cursor: pointer;
+//     &:hover {
+//     background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+//     color: black;
+//   }
+// `;
 
 class App extends Component {
   state = {
@@ -83,17 +83,19 @@ class App extends Component {
   };
 
   render() {
-    const style = {
-      backgroundColor: "green",
-      font: "inherit",
-      border: "1px solid blue",
-      padding: "8px",
-      cursor: "pointer",
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black",
-      },
-    };
+    // const style = {
+    //   backgroundColor: "green",
+    //   font: "inherit",
+    //   border: "1px solid blue",
+    //   padding: "8px",
+    //   cursor: "pointer",
+    //   ":hover": {
+    //     backgroundColor: "lightgreen",
+    //     color: "black",
+    //   },
+    // };
+    // let btnClass = [classes.Button]
+    let btnClass = '';
 
     let persons = null;
     if (this.state.showPersons) {
@@ -117,6 +119,7 @@ class App extends Component {
       //   backgroundColor: "salmon",
       //   color: "black",
       // };
+      btnClass = classes.Red
     }
 
     const charList = this.state.userInput.split("").map((ch, index) => {
@@ -129,22 +132,22 @@ class App extends Component {
       );
     });
 
-    let classes = [];
+    let assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push("red");
+      assignedClasses.push(classes.red);
     }
     if (this.state.persons.length <= 1) {
-      classes.push("bold");
+      assignedClasses.push(classes.bold);
     }
 
     return (
       // <StyleRoot>
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hi, I'm a React App1</h1>
-          <p className={classes.join(" ")}>This is working!</p>
-          <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
+          <p className={assignedClasses.join(" ")}>This is working!</p>
+          <button className={btnClass} alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
             Toggle Persons
-          </StyledButton>
+          </button>
           {persons}
           <UserInput
             changed={this.usernameChangedHandler}
