@@ -5,6 +5,7 @@ import UserInput from "./UserInput/UserInput";
 import UserOutput from "./UserOutput/UserOutput";
 import Validation from "./ValidationComponent/Validation";
 import Char from "./Char/Char";
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 // import styled from 'styled-components';
 
 // import Radium, { StyleRoot } from "radium";
@@ -26,7 +27,7 @@ class App extends Component {
       { id: "1", name: "Anton", age: 35 },
       { id: "2", name: "Max", age: 29 },
       { id: "3", name: "Stephanie", age: 28 },
-    ], 
+    ],
     username: "Super Anton",
     showPersons: false,
     userInput: "",
@@ -95,7 +96,7 @@ class App extends Component {
     //   },
     // };
     // let btnClass = [classes.Button]
-    let btnClass = '';
+    let btnClass = "";
 
     let persons = null;
     if (this.state.showPersons) {
@@ -103,13 +104,14 @@ class App extends Component {
         <div>
           {this.state.persons.map((person, index) => {
             return (
-              <Person
-                key={person.id}
-                name={person.name}
-                age={person.age}
-                click={this.deletePersonHandler.bind(this, index)}
-                changed={(event) => this.nameChangedHandler(event, person.id)}
-              />
+              <ErrorBoundary key={person.id}>
+                <Person
+                  name={person.name}
+                  age={person.age}
+                  click={this.deletePersonHandler.bind(this, index)}
+                  changed={(event) => this.nameChangedHandler(event, person.id)}
+                />
+              </ErrorBoundary>
             );
           })}
         </div>
@@ -119,7 +121,7 @@ class App extends Component {
       //   backgroundColor: "salmon",
       //   color: "black",
       // };
-      btnClass = classes.Red
+      btnClass = classes.Red;
     }
 
     const charList = this.state.userInput.split("").map((ch, index) => {
@@ -142,27 +144,31 @@ class App extends Component {
 
     return (
       // <StyleRoot>
-        <div className={classes.App}>
-          <h1>Hi, I'm a React App1</h1>
-          <p className={assignedClasses.join(" ")}>This is working!</p>
-          <button className={btnClass} alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
-            Toggle Persons
-          </button>
-          {persons}
-          <UserInput
-            changed={this.usernameChangedHandler}
-            currentName={this.state.username}
-          />
-          <UserOutput userName={this.state.username} />
-          <input
-            type="text"
-            onChange={this.inputChangedHandler}
-            value={this.state.userInput}
-          />
-          <p>{this.state.userInput}</p>
-          <Validation inputLength={this.state.userInput.length} />
-          {charList}
-        </div>
+      <div className={classes.App}>
+        <h1>Hi, I'm a React App1</h1>
+        <p className={assignedClasses.join(" ")}>This is working!</p>
+        <button
+          className={btnClass}
+          // alt={this.state.showPersons}
+          onClick={this.togglePersonsHandler}
+        >
+          Toggle Persons
+        </button>
+        {persons}
+        <UserInput
+          changed={this.usernameChangedHandler}
+          currentName={this.state.username}
+        />
+        <UserOutput userName={this.state.username} />
+        <input
+          type="text"
+          onChange={this.inputChangedHandler}
+          value={this.state.userInput}
+        />
+        <p>{this.state.userInput}</p>
+        <Validation inputLength={this.state.userInput.length} />
+        {charList}
+      </div>
       // </StyleRoot>
     );
     // return React.createElement('div', {className:"App"}, React.createElement('h1', null, 'Does this work now?'))
@@ -170,4 +176,4 @@ class App extends Component {
 }
 
 // export default Radium(App);
-export default App
+export default App;
