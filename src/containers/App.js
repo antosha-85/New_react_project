@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import classes from "./App.module.css";
-import Person from "./Person/Person";
-import UserInput from "./UserInput/UserInput";
-import UserOutput from "./UserOutput/UserOutput";
-import Validation from "./ValidationComponent/Validation";
-import Char from "./Char/Char";
-import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
+import Person from "../components/Persons/Person/Person";
+import UserInput from "../components/UserInput/UserInput";
+import UserOutput from "../components/UserOutput/UserOutput";
+import Validation from "../components/ValidationComponent/Validation";
+import Char from "../components/Char/Char";
+import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 // import styled from 'styled-components';
 
 // import Radium, { StyleRoot } from "radium";
