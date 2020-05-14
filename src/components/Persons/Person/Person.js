@@ -4,6 +4,7 @@ import classes from "./Person.module.css";
 // import Radium from 'radium';
 
 const person = (props) => {
+  console.log('[Person.js] rendering ... ')
   // const StyledDiv = styled.div`
   // width: 60%;
   // margin: 16px auto;

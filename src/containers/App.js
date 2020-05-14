@@ -39,6 +39,18 @@ class App extends Component {
       userInput: "",
     };
   }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  // componentWillMount() {
+  //   console.log('[App.js] componentWillMount')
+  // }
+  componentDidMount() {
+    console.log('[App.js] componentDidMouunt')
+  }
   // state = {
   //   persons: [
   //     { id: "1", name: "Anton", age: 35 },
@@ -101,6 +113,7 @@ class App extends Component {
   };
 
   render() {
+    console.log('[App.js] render')
     // const style = {
     //   backgroundColor: "green",
     //   font: "inherit",
