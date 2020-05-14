@@ -24,16 +24,31 @@ import Cockpit from "../components/Cockpit/Cockpit";
 // `;
 
 class App extends Component {
-  state = {
-    persons: [
-      { id: "1", name: "Anton", age: 35 },
-      { id: "2", name: "Max", age: 29 },
-      { id: "3", name: "Stephanie", age: 28 },
-    ],
-    username: "Super Anton",
-    showPersons: false,
-    userInput: "",
-  };
+
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+    this.state = {
+      persons: [
+        { id: "1", name: "Anton", age: 35 },
+        { id: "2", name: "Max", age: 29 },
+        { id: "3", name: "Stephanie", age: 28 },
+      ],
+      username: "Super Anton",
+      showPersons: false,
+      userInput: "",
+    };
+  }
+  // state = {
+  //   persons: [
+  //     { id: "1", name: "Anton", age: 35 },
+  //     { id: "2", name: "Max", age: 29 },
+  //     { id: "3", name: "Stephanie", age: 28 },
+  //   ],
+  //   username: "Super Anton",
+  //   showPersons: false,
+  //   userInput: "",
+  // };
   inputChangedHandler = (e) => {
     this.setState({ userInput: e.target.value });
   };
