@@ -8,6 +8,7 @@ import Char from "../components/Char/Char";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
+import Clock from '../components/Clock/Clock'
 // import styled from 'styled-components';
 
 // import Radium, { StyleRoot } from "radium";
@@ -201,6 +202,7 @@ class App extends Component {
         <p>{this.state.userInput}</p>
         <Validation inputLength={this.state.userInput.length} />
         {charList}
+        <Clock/>
       </div>
       // </StyleRoot>
     );
