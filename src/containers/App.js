@@ -52,6 +52,14 @@ class App extends Component {
   componentDidMount() {
     console.log('[App.js] componentDidMouunt')
   }
+
+  shouldComponentUpdate(nestProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate')
+    return true;
+  }
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate')
+  }
   // state = {
   //   persons: [
   //     { id: "1", name: "Anton", age: 35 },
