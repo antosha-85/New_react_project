@@ -38,6 +38,7 @@ class App extends Component {
       username: "Super Anton",
       showPersons: false,
       userInput: "",
+      showCockpit: true
     };
   }
 
@@ -190,12 +191,15 @@ class App extends Component {
         >
           Toggle Persons
         </button> */}
-        <Cockpit
+        <button onClick={()=> {
+          this.setState({showCockpit : false})
+        }}>Remove cockpit</button>
+        {this.state.showCockpit ? <Cockpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={()=>this.togglePersonsHandler()}
-        />
+        /> : null}
         {persons}
         <UserInput
           changed={this.usernameChangedHandler}

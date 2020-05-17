@@ -5,8 +5,21 @@ const Cockpit = (props) => {
   // eslint-disable
   useEffect(()=> {
     console.log('[Cockpit.js] useEffect');
-  })
+    //http request
+    setTimeout(()=> {
+      alert('Saved data to cloud!')
+    }, 1000);
+    return ()=> {
+      console.log('[Person.js] cleanup work in useEffect')
+    }
+  }, [])
   
+  useEffect(()=>{
+    console.log('[Cockpit.js 2nd useEffect');
+    return ()=> {
+      console.log('[Cockpit.js] cleanup workin 2nd useEffect')
+    }
+  })
   
   let assignedClasses = [];
   let btnClass = "";
