@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import classes from "./Person.module.css";
+import Aux from '../../../hoc/Aux'
 // import styled from 'styled-components';
 // import Radium from 'radium';
 class Person extends Component {
@@ -30,13 +31,15 @@ class Person extends Component {
     //   throw new Error('Something went wrong!')
     // }
     return (
-      <div className={classes.Person}>
+      // <div className={classes.Person}>
+      <Aux>
         <h2 onClick={this.props.click}>
           I'm a {this.props.name} and I am {this.props.age} years old!
         </h2>
         <div>{this.props.children}</div>
         <input type="text" onChange={this.props.changed} value={this.props.name} />
-      </div>
+      </Aux>
+      // </div>
     );
   }
 };
