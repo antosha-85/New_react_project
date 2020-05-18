@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import classes from "./Person.module.css";
 import Aux from '../../../hoc/Aux'
 // import styled from 'styled-components';
@@ -32,13 +32,15 @@ class Person extends Component {
     // }
     return (
       // <div className={classes.Person}>
-      <Aux>
+      // <Aux>
+      <Fragment>
         <h2 onClick={this.props.click}>
           I'm a {this.props.name} and I am {this.props.age} years old!
         </h2>
         <div>{this.props.children}</div>
         <input type="text" onChange={this.props.changed} value={this.props.name} />
-      </Aux>
+      </Fragment>
+      // </Aux>
       // </div>
     );
   }
