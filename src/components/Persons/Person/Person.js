@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import classes from "./Person.module.css";
-import Aux from '../../../hoc/Aux'
+import Aux from '../../../hoc/Aux';
+import withClass from '../../../hoc/withClass'
 // import styled from 'styled-components';
 // import Radium from 'radium';
 class Person extends Component {
@@ -47,4 +48,4 @@ class Person extends Component {
 };
 
 // export default Radium(person)
-export default Person;
+export default withClass(Person, classes.Person);
