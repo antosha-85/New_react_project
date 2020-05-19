@@ -40,7 +40,8 @@ class App extends Component {
       username: "Super Anton",
       showPersons: false,
       userInput: "",
-      showCockpit: true
+      showCockpit: true, 
+      changeCounter: 0
     };
   }
 
@@ -110,13 +111,16 @@ class App extends Component {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
     // const person = Object.assign({}, this.state.persons[personIndex])
-    this.setState({
+    this.setState((prevState, props) => {
+      return {
       // persons: [
       //   { name: "Anton", age: 35 },
       //   { name: e.target.value, age: 29 },
       //   { name: "Oksana", age: 28 },
       // ],
-      persons: persons,
+      persons: persons, 
+      changeCounter: prevState.changeCounter + 1
+      }
     });
   };
   togglePersonsHandler = () => {
