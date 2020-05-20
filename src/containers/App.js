@@ -41,7 +41,8 @@ class App extends Component {
       showPersons: false,
       userInput: "",
       showCockpit: true, 
-      changeCounter: 0
+      changeCounter: 0, 
+      authenticated: false
     };
   }
 
@@ -128,6 +129,9 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   };
 
+  loginHandler = () => {
+    this.setState({authenticated: true})
+  }
   render() {
     console.log('[App.js] render')
     // const style = {
@@ -152,6 +156,7 @@ class App extends Component {
           persons={this.state.persons}
           clicked={()=>this.deletePersonHandler()}
           changed={this.nameChangedHandler}
+          isAuthenticated={this.state.authenticated}
         />
         /* {this.state.persons.map((person, index) => {
             return (
@@ -200,11 +205,13 @@ class App extends Component {
         <button onClick={()=> {
           this.setState({showCockpit : false})
         }}>Remove cockpit</button>
-        {this.state.showCockpit ? <Cockpit
+        {this.state.showCockpit ? 
+        <Cockpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
           personsLength={this.state.persons.length}
           clicked={()=>this.togglePersonsHandler()}
+          login={this.loginHandler}
         /> : null}
         {persons}
         <UserInput
