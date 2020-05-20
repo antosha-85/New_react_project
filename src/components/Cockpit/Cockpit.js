@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useRef } from "react";
 import classes from "./Cockpit.module.css";
 const Cockpit = (props) => {
 
+
+  const toggleBtnRef = useRef(null);
   // eslint-disable
   useEffect(()=> {
     console.log('[Cockpit.js] useEffect');
     //http request
     // setTimeout(()=> {
-    //   alert('Saved data to cloud!')
-    // }, 1000);
+      //   alert('Saved data to cloud!')
+      // }, 1000);
+      toggleBtnRef.current.click()
     return ()=> {
       console.log('[Person.js] cleanup work in useEffect')
     }
@@ -42,6 +45,7 @@ const Cockpit = (props) => {
         className={btnClass}
         // alt={this.state.showPersons}
         onClick={props.clicked}
+        ref={toggleBtnRef}
       >
         Toggle Persons
       </button>
