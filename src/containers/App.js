@@ -8,9 +8,10 @@ import Char from "../components/Char/Char";
 import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
-import Clock from '../components/Clock/Clock';
-import withClass from '../hoc/withClass';
-import Aux from '../hoc/Aux'
+import Clock from "../components/Clock/Clock";
+import withClass from "../hoc/withClass";
+import Aux from "../hoc/Aux";
+import AuthContext from "../context/auth-context";
 // import styled from 'styled-components';
 
 // import Radium, { StyleRoot } from "radium";
@@ -27,10 +28,9 @@ import Aux from '../hoc/Aux'
 // `;
 
 class App extends Component {
-
   constructor(props) {
     super(props);
-    console.log('[App.js] constructor');
+    console.log("[App.js] constructor");
     this.state = {
       persons: [
         { id: "1", name: "Anton", age: 35 },
@@ -40,14 +40,14 @@ class App extends Component {
       username: "Super Anton",
       showPersons: false,
       userInput: "",
-      showCockpit: true, 
-      changeCounter: 0, 
-      authenticated: false
+      showCockpit: true,
+      changeCounter: 0,
+      authenticated: false,
     };
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log('[App.js] getDerivedStateFromProps', props);
+    console.log("[App.js] getDerivedStateFromProps", props);
     return state;
   }
 
@@ -55,15 +55,15 @@ class App extends Component {
   //   console.log('[App.js] componentWillMount')
   // }
   componentDidMount() {
-    console.log('[App.js] componentDidMouunt')
+    console.log("[App.js] componentDidMouunt");
   }
 
   shouldComponentUpdate(nestProps, nextState) {
-    console.log('[App.js] shouldComponentUpdate')
+    console.log("[App.js] shouldComponentUpdate");
     return true;
   }
   componentDidUpdate() {
-    console.log('[App.js] componentDidUpdate')
+    console.log("[App.js] componentDidUpdate");
   }
   // state = {
   //   persons: [
@@ -114,14 +114,14 @@ class App extends Component {
     // const person = Object.assign({}, this.state.persons[personIndex])
     this.setState((prevState, props) => {
       return {
-      // persons: [
-      //   { name: "Anton", age: 35 },
-      //   { name: e.target.value, age: 29 },
-      //   { name: "Oksana", age: 28 },
-      // ],
-      persons: persons, 
-      changeCounter: prevState.changeCounter + 1
-      }
+        // persons: [
+        //   { name: "Anton", age: 35 },
+        //   { name: e.target.value, age: 29 },
+        //   { name: "Oksana", age: 28 },
+        // ],
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1,
+      };
     });
   };
   togglePersonsHandler = () => {
@@ -130,10 +130,10 @@ class App extends Component {
   };
 
   loginHandler = () => {
-    this.setState({authenticated: true})
-  }
+    this.setState({ authenticated: true });
+  };
   render() {
-    console.log('[App.js] render')
+    console.log("[App.js] render");
     // const style = {
     //   backgroundColor: "green",
     //   font: "inherit",
@@ -150,15 +150,16 @@ class App extends Component {
 
     let persons = null;
     if (this.state.showPersons) {
-      persons = 
+      persons = (
         // <div>
         <Persons
           persons={this.state.persons}
-          clicked={()=>this.deletePersonHandler()}
+          clicked={() => this.deletePersonHandler()}
           changed={this.nameChangedHandler}
           isAuthenticated={this.state.authenticated}
         />
-        /* {this.state.persons.map((person, index) => {
+      );
+      /* {this.state.persons.map((person, index) => {
             return (
               // <ErrorBoundary key={person.id}>
                 <Person
@@ -170,8 +171,8 @@ class App extends Component {
               // </ErrorBoundary>
             );
           })} */
-        // </div>
-      
+      // </div>
+
       // style.backgroundColor = "red";
       // style[":hover"] = {
       //   backgroundColor: "salmon",
@@ -202,18 +203,30 @@ class App extends Component {
         >
           Toggle Persons
         </button> */}
-        <button onClick={()=> {
-          this.setState({showCockpit : false})
-        }}>Remove cockpit</button>
-        {this.state.showCockpit ? 
-        <Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          personsLength={this.state.persons.length}
-          clicked={()=>this.togglePersonsHandler()}
-          login={this.loginHandler}
-        /> : null}
-        {persons}
+        <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}
+        >
+          Remove cockpit
+        </button>
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+            login: this.loginHandler
+          }}
+        >
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              clicked={() => this.togglePersonsHandler()}
+              // login={this.loginHandler}
+            />
+          ) : null}
+          {persons}
+        </AuthContext.Provider>
         <UserInput
           changed={this.usernameChangedHandler}
           currentName={this.state.username}
@@ -227,7 +240,7 @@ class App extends Component {
         <p>{this.state.userInput}</p>
         <Validation inputLength={this.state.userInput.length} />
         {charList}
-        <Clock/>
+        <Clock />
       </Aux>
       // </StyleRoot>
     );

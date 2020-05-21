@@ -2,7 +2,8 @@ import React, { Component, Fragment } from "react";
 import PropTypes from 'prop-types';
 import classes from "./Person.module.css";
 import Aux from '../../../hoc/Aux';
-import withClass from '../../../hoc/withClass'
+import withClass from '../../../hoc/withClass';
+import AuthContext from '../../../context/auth-context';
 // import styled from 'styled-components';
 // import Radium from 'radium';
 class Person extends Component {
@@ -44,7 +45,10 @@ class Person extends Component {
       // <div className={classes.Person}>
       // <Aux>
       <Fragment>
-        {this.props.isAuth ? <p>Authenticated</p> : <p>Please log in</p>}
+        <AuthContext.Consumer>
+          {(context)=> context.authenticated ? <p>Authenticated</p> : <p>Please log in</p>}
+        {/* {this.props.isAuth ? <p>Authenticated</p> : <p>Please log in</p>} */}
+        </AuthContext.Consumer>
         <h2 onClick={this.props.click}>
           I'm a {this.props.name} and I am {this.props.age} years old!
         </h2>
